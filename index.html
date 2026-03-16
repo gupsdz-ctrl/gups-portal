@@ -95,6 +95,10 @@
 
     <!-- صندوق تسجيل الدخول -->
     <div class="gups-login-box" id="gupsLoginBox">
+        <div class="gups-header-bar" id="gupsHeaderBar" style="display: none; background: #1a1a1a; color: #d4af37; padding: 15px; border-radius: 12px; margin-bottom: 20px; align-items: center; justify-content: space-between;">
+    <div>أهلاً بك: <span id="gupsHeaderName"></span></div>
+    <button onclick="location.reload()" style="background:transparent; border:1px solid #d4af37; color:#d4af37; border-radius:5px; padding:5px 10px; cursor:pointer;">خروج</button>
+</div>
         <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="شعار الاتحاد">
         <h2>بوابة الخدمات الرقمية</h2>
         <p>فرع الجزائر - GUPS ALGERIA</p>
@@ -213,7 +217,7 @@
                 </div>
             </div>
             <div class="gups-action-buttons">
-                <button class="gups-download-btn" onclick="gupsDownloadCard()">⬇ تحميل البطاقة</button>
+                <button class="gups-download-btn" onclick="gupsDownloadCard()"> تحميل البطاقة</button>
             </div>
             <div class="gups-action-buttons" style="margin-top:7px;">
                 <button class="gups-wallet-btn apple"> Apple Wallet</button>
@@ -284,7 +288,7 @@
     }
 
     window.gupsFetchAndShow = async function() {
-        if (gupsData.length === 0) await gupsLoadData();
+        if (if (gupsStudent{)) await gupsLoadData();
         var idInput = document.getElementById('gupsSearchId').value.trim();
         var errorMsg = document.getElementById('gupsErrorMsg');
         gupsStudent = gupsData.find(function(s) { return s.id === idInput; });
