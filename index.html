@@ -1,0 +1,206 @@
+<div id="gups-official-portal" style="direction: rtl; font-family: Cairo, sans-serif; margin: 10px auto; max-width: 500px; padding: 5px; text-align: center; width: 95%;">
+    
+    <div id="loginBox" style="background: rgb(255, 255, 255); border-radius: 20px; border-top: 6px solid rgb(26, 26, 26); box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 40px; padding: 35px 20px;">
+        <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="margin-bottom: 15px; width: 80px;" />
+        <h1 style="color: #111111; font-size: 18px; font-weight: 900; margin: 0px;">بوابة الخدمات الرقمية </h2> 
+     <h2 style="color: #111111; font-size: 15px; font-weight: 500; margin: 0px;">فرع الجزائر </h2>        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
+            <input id="gupsSearchId" placeholder="أدخل الرقم التعريفي الموحد" style="background: rgb(253, 253, 253); border-radius: 12px; border: 1px solid rgb(221, 221, 221); font-family: Cairo; font-size: 16px; outline: none; padding: 16px; text-align: center;" type="text" />
+            <button onclick="fetchAndShow()" style="background: rgb(26, 26, 26); border-radius: 12px; border: none; color: #d4af37; cursor: pointer; font-size: 16px; font-weight: 900; padding: 16px;">استعلام عن بياناتي</button>
+        </div>
+        <a href="https://plogupsdz.blogspot.com/p/blog-page_10.html" style="color: #007a3d; display: block; font-size: 10px; margin-top: 15px; text-decoration: none;">اطّلع على سياسة الخصوصية الخاصة بنا</a>
+        <div id="errorMsg" style="color: #ee2335; font-size: 12px; font-weight: bold; margin-top: 10px;"></div>
+    </div>
+
+    <div id="welcomePage" style="animation: 0.4s ease 0s 1 normal none running slideUp; background: rgb(255, 255, 255); border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 40px; display: none; padding: 30px 20px;">
+        <div style="font-size: 40px; margin-bottom: 10px;">👤</div>
+        <h2 style="color: #666666; font-size: 16px; margin: 0px;">أهلاً بك الزميل(ة)</h2>
+        <h1 id="userNameHello" style="color: #111111; font-size: 20px; font-weight: 900; margin: 5px 0px 20px;"></h1>
+        <div style="background: rgb(249, 249, 249); border-radius: 12px; border: 1px solid rgb(238, 238, 238); margin-bottom: 25px; padding: 15px;">
+            <div style="align-items: center; display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span id="rankTitle" style="font-size: 12px; font-weight: 900;"></span>
+                <span id="pointsCount" style="color: #d4af37; font-size: 11px; font-weight: bold;"></span>
+            </div>
+            <div style="background: rgb(238, 238, 238); border-radius: 10px; height: 6px; overflow: hidden; width: 100%;">
+                <div id="rankBar" style="background: rgb(26, 26, 26); height: 100%; transition: 1.2s; width: 0%;"></div>
+            </div>
+        </div>
+        <button onclick="goToDashboard()" style="background: rgb(26, 26, 26); border-radius: 12px; border: none; color: white; cursor: pointer; font-weight: bold; padding: 15px; width: 100%;">الدخول إلى لوحة الخدمات</button>
+    </div>
+
+    <div id="dashboardSection" style="animation: 0.5s ease 0s 1 normal none running fadeIn; display: none;">
+        <div style="background: rgb(255, 255, 255); border-radius: 15px; border: 1px solid rgb(238, 238, 238); display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-bottom: 15px; padding: 15px;">
+            <div class="srv-node" onclick="showContent('card')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="4"><path d="M7 8h10M7 12h10M7 16h6"></path></rect></svg></div><span>البطاقة</span></div>
+            <div class="srv-node" onclick="showContent('doc1')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"><polyline points="14 2 14 8 20 8"></polyline></path></svg></div><span>انتساب</span></div>
+            <div class="srv-node" onclick="showContent('doc2')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="7"><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></rect></svg></div><span>مهام</span></div>
+            <div class="srv-node" onclick="showContent('doc3')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"><polyline points="22 4 12 14.01 9 11.01"></polyline></path></svg></div><span>براءة ذمة</span></div>
+            <div class="srv-node" onclick="showContent('doc4')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path></svg></div><span>مشاركة</span></div>
+            <div class="srv-node" onclick="showContent('doc5')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"><circle cx="9" cy="7" r="4"></circle></path></svg></div><span>تطوع</span></div>
+            <div class="srv-node" onclick="showContent('doc6')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg></div><span>توصية</span></div>
+            <div class="srv-node" onclick="showContent('doc7')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-4.5 6H10.3Z"></path></svg></div><span>تصريح</span></div>
+        </div>
+    </div>
+
+    <div id="outputArea" style="display: none;">
+        <div class="content-panel" id="view-card">
+            <div id="captureArea" style="background: rgb(255, 255, 255); border-radius: 15px; border: 1px solid rgb(221, 221, 221); overflow: hidden; position: relative; width: 100%;">
+                <div id="rankStripe" style="background: rgb(0, 0, 0); height: 8px;"></div>
+                <div style="align-items: center; background: rgb(250, 250, 250); border-bottom: 2px solid rgb(212, 175, 55); display: flex; padding: 15px;">
+                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="height: 55px; margin-left: 15px; width: 55px;" />
+                    <div style="text-align: right;">
+                        <div style="color: black; font-size: 15px; font-weight: 900;">الاتحاد العام لطلبة فلسطين</div>
+                        <div style="color: #007a3d; font-size: 12px; font-weight: 700;">فرع الجزائر - GUPS ALGERIA</div>
+                    </div>
+                </div>
+                <div style="background: rgb(255, 255, 255); min-height: 160px; padding: 20px; position: relative;">
+                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="left: 50%; opacity: 0.04; pointer-events: none; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 130px;" />
+                    <div style="display: grid; gap: 15px; grid-template-columns: 1fr 1fr; position: relative; text-align: right; z-index: 1;">
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الاسم الكامل</small><div id="val-n" style="color: black; font-size: 13px; font-weight: 800;"></div></div>
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الرقم التعريفي</small><div id="val-i" style="color: black; font-size: 13px; font-weight: 800;"></div></div>
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الوحدة التنظيمية</small><div id="val-u" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">المهمة الرسمية</small><div id="val-t" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">رقم الجوال</small><div id="val-p" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
+                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">تاريخ الإصدار</small><div style="color: #333333; font-size: 12px; font-weight: 700;">2026/2027</div></div>
+                    </div>
+                </div>
+                <div style="background: rgb(26, 26, 26); color: #d4af37; font-size: 9px; font-weight: 900; letter-spacing: 0.5px; padding: 10px; text-align: center;">GENERAL UNION OF PALESTINE STUDENTS • ALGERIA BRANCH</div>
+                <div style="background: rgb(244, 244, 244); border-top: 1px solid rgb(221, 221, 221); color: #555555; font-size: 7px; font-weight: bold; padding: 6px; text-align: center;">بطاقة عضوية رقمية صادرة عن الاتحاد العام لطلبة فلسطين - فرع الجزائر، مخصصة لإثبات الصفة النقابية </div>
+            </div>
+            <button class="dl-btn" onclick="download('captureArea', 'ID_Card')">تحميل البطاقة </button>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button class="wallet-btn" style="background: rgb(0, 0, 0); color: white;"> Apple Wallet</button>
+                <button class="wallet-btn" style="background: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); color: black;">Google Wallet</button>
+            </div>
+        </div>
+
+        <div class="content-panel" id="view-official" style="display: none;">
+            <div id="captureDoc" style="background: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238); box-sizing: border-box; padding: 35px 25px; position: relative; text-align: right; width: 100%;">
+                <div style="align-items: center; border-bottom: 2px solid rgb(0, 0, 0); display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 10px;">
+                    <div style="font-size: 11px; font-weight: bold; line-height: 1.4;">الاتحاد العام لطلبة فلسطين<br />فرع الجزائر</div>
+                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="width: 45px;" />
+                </div>
+                <h3 id="docTitle" style="font-size: 17px; font-weight: 900; margin-bottom: 20px; text-align: center; text-decoration: underline;"></h3>
+                <div id="docBody" style="color: #111111; font-size: 14px; line-height: 1.8; min-height: 120px; text-align: justify;"></div>
+                <div style="align-items: flex-end; display: flex; justify-content: space-between; margin-top: 35px;">
+                    <div style="color: #666666; font-size: 9px;">صدرت الكترونياً بتاريخ: <span id="docDate"></span></div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 12px; font-weight: bold;">رئيس فرع الجزائر</div>
+                        <div style="font-family: serif; font-size: 17px; font-weight: bold; margin: 2px 0px;">د. عهد خوالدة</div>
+                        <div style="border: 1px solid rgb(0, 0, 0); font-size: 8px; font-weight: bold; padding: 1px 3px;">ختم رقمي معتمد </div>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid rgb(238, 238, 238); margin-top: 20px; padding-top: 10px; text-align: center;">
+                    <p style="color: #777777; font-size: 15px; line-height: 1.2; margin: 0px;">هذه الوثيقة صادرة إلكترونياً عن الاتحاد العام لطلبة فلسطين - فرع الجزائر.<br />تُستخدم لأغراض تنظيمية داخلية فقط ولا تُعتبر مستنداً رسمياً خارج أطر الاتحاد.</p>
+                </div>
+            </div>
+            <button class="dl-btn" onclick="download('captureDoc', 'Official_Document')" style="background: rgb(17, 17, 17);">تحميل الوثيقة المعتمدة</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .srv-node { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.2s; }
+    .icon-box { width: 45px; height: 45px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #1a1a1a; border: 1px solid #eee; margin-bottom: 5px; }
+    .srv-node span { font-size: 9px; font-weight: 800; color: #444; white-space: nowrap; }
+    .srv-node:hover .icon-box { background: #d4af37; color: #fff; border-color: #d4af37; }
+    .dl-btn { margin-top:15px; width:100%; padding:14px; background:#007a3d; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:bold; font-family:'Cairo'; font-size:14px; }
+    .wallet-btn { flex:1; border-radius:8px; padding:10px; font-weight:bold; font-size:10px; cursor:pointer; font-family:'Cairo'; }
+    @keyframes slideUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    let gupsData = [];
+    let student = null;
+    const DATA_SRC = 'https://docs.google.com/spreadsheets/d/15_-mHBHxUHPoYsdLzYqfsqkHJoQr6z2FvC2Brj2yOtc/gviz/tq?tqx=out:json';
+
+    async function loadData() {
+        try {
+            const r = await fetch(DATA_SRC);
+            const t = await r.text();
+            const j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
+            gupsData = j.table.rows.filter(row => row.c && row.c[0]).map(row => ({
+                id: String(row.c[0].v).trim(),
+                name: row.c[1] ? row.c[1].v : '',
+                unit: row.c[2] ? row.c[2].v : '',
+                task: row.c[3] ? row.c[3].v : '',
+                points: row.c[4] ? parseInt(row.c[4].v) : 0,
+                phone: row.c[5] ? row.c[5].v : ''
+            }));
+        } catch(e) {}
+    }
+
+    function updateRank(pts) {
+        let rank = "عضو"; let color = "#000"; let percent = (pts / 100) * 100;
+        if (pts >= 100) { rank = "عضو فاعل"; color = "#007a3d"; percent = 100; }
+        if (pts >= 300) { rank = "عضو ذهبي"; color = "#d4af37"; }
+
+        document.getElementById('rankTitle').innerText = "رتبة الكادر: " + rank;
+        document.getElementById('pointsCount').innerText = pts + " نقطة";
+        document.getElementById('rankBar').style.width = Math.min(percent, 100) + "%";
+        document.getElementById('rankStripe').style.background = color;
+    }
+
+    async function fetchAndShow() {
+        if (gupsData.length === 0) await loadData();
+        const idInput = document.getElementById('gupsSearchId').value.trim();
+        student = gupsData.find(s => s.id === idInput);
+        
+        if (student) {
+            document.getElementById('userNameHello').innerText = student.name;
+            document.getElementById('val-n').innerText = student.name;
+            document.getElementById('val-i').innerText = student.id;
+            document.getElementById('val-u').innerText = student.unit;
+            document.getElementById('val-t').innerText = student.task;
+            document.getElementById('val-p').innerText = student.phone;
+            document.getElementById('docDate').innerText = new Date().toLocaleDateString('ar-EG');
+            
+            updateRank(student.points || 0);
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('welcomePage').style.display = 'block';
+        } else {
+            document.getElementById('errorMsg').innerText = " الرقم التعريفي غير مسجل لدى فرع الجزائر";
+        }
+    }
+
+    function goToDashboard() {
+        document.getElementById('welcomePage').style.display = 'none';
+        document.getElementById('dashboardSection').style.display = 'block';
+        document.getElementById('outputArea').style.display = 'block';
+        showContent('card');
+    }
+
+    function showContent(type) {
+        document.querySelectorAll('.content-panel').forEach(p => p.style.display = 'none');
+        if(type === 'card') {
+            document.getElementById('view-card').style.display = 'block';
+        } else {
+            const title = document.getElementById('docTitle');
+            const body = document.getElementById('docBody');
+            const docs = {
+                'doc1': ['شهادة انتساب رسمية', `يشهد الاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <b>${student.name}</b>، المقيد بالسجلات الإدارية تحت الرقم <b>${student.id}</b>، هو عضو منتسب رسمياً ضمن صفوف الاتحاد للعام الدراسي 2025/2026 ضمن وحدة ولاية <b>${student.unit}</b>، وبناءً عليه مُنح هذه الشهادة لإثبات الصفة النقابية.`],
+                'doc2': ['إفادة إثبات مهام نقابية', `يصادق الاتحاد العام لطلبة فلسطين بالجزائر بأن الزميل(ة) <b>${student.name}</b> يشغل منصب <b>(${student.task})</b>، وهو مكلف بممارسة كافة الصلاحيات والمسؤوليات النقابية الموكلة إليه لتمثيل الطلبة وفق النظام الأساسي للاتحاد.`],
+                'doc3': ['شهادة براءة ذمة إدارية', `تفيد الهيئة الإدارية للاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <b>${student.name}</b> قد أتم كافة الالتزامات الإدارية والمالية تجاه الاتحاد، وليس لديه أي متعلقات أو عهدة عالقة حتى تاريخ صدور هذه الشهادة.`],
+                'doc4': ['شهادة مشاركة وتقدير', `يتقدم الاتحاد العام لطلبة فلسطين بخالص الشكر والتقدير للزميل(ة) <b>${student.name}</b>، وذلك لمشاركته الفعالة وجهوده الملموسة في إنجاح النشاطات الوطنية والدورات التكوينية التي نظمها فرع الجزائر خلال الموسم الدراسي الجاري.`],
+                'doc5': ['إفادة عمل تطوعي', `يشهد فرع الجزائر بأن الزميل(ة) <b>${student.name}</b> قد ساهم بجهود تطوعية متميزة في خدمة الطلبة الفلسطينيين بالجزائر، وقد أظهر خلال فترة تطوعه روحاً وطنية عالية وانضباطاً في العمل الميداني.`],
+                'doc6': ['رسالة توصية رسمية', `بناءً على السيرة النقابية المشرفة للزميل(ة) <b>${student.name}</b> والتزامه بالمهام الموكلة إليه، فإننا نوصي به ككادر متميز يتمتع بروح المسؤولية والكفاءة في العمل الجماعي، ونشجع كافة الجهات المعنية على التعاون معه.`],
+                'doc7': ['تصريح فعاليات ومهمة', `يمنح هذا التصريح للزميل(ة) <b>${student.name}</b> بصفته كادراً رسمياً في الاتحاد، لتسهيل حضوره وتمثيله للاتحاد في الفعاليات الوطنية والمحلية المقامة في ولاية <b>${student.unit}</b>، مع الرجاء من السلطات المعنية تقديم التسهيلات اللازمة.`]
+            };
+            title.innerText = docs[type][0];
+            body.innerHTML = docs[type][1];
+            document.getElementById('view-official').style.display = 'block';
+        }
+        window.scrollTo({ top: document.getElementById('outputArea').offsetTop - 20, behavior: 'smooth' });
+    }
+
+    function download(divId, fileName) {
+        html2canvas(document.getElementById(divId), { scale: 3, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `GUPS_OFFICIAL_${fileName}.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        });
+    }
+    window.onload = loadData;
+</script>
