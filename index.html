@@ -1,206 +1,371 @@
-<div id="gups-official-portal" style="direction: rtl; font-family: Cairo, sans-serif; margin: 10px auto; max-width: 500px; padding: 5px; text-align: center; width: 95%;">
-    
-    <div id="loginBox" style="background: rgb(255, 255, 255); border-radius: 20px; border-top: 6px solid rgb(26, 26, 26); box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 40px; padding: 35px 20px;">
-        <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="margin-bottom: 15px; width: 80px;" />
-        <h1 style="color: #111111; font-size: 18px; font-weight: 900; margin: 0px;">بوابة الخدمات الرقمية </h2> 
-     <h2 style="color: #111111; font-size: 15px; font-weight: 500; margin: 0px;">فرع الجزائر </h2>        
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
-            <input id="gupsSearchId" placeholder="أدخل الرقم التعريفي الموحد" style="background: rgb(253, 253, 253); border-radius: 12px; border: 1px solid rgb(221, 221, 221); font-family: Cairo; font-size: 16px; outline: none; padding: 16px; text-align: center;" type="text" />
-            <button onclick="fetchAndShow()" style="background: rgb(26, 26, 26); border-radius: 12px; border: none; color: #d4af37; cursor: pointer; font-size: 16px; font-weight: 900; padding: 16px;">استعلام عن بياناتي</button>
-        </div>
-        <a href="https://plogupsdz.blogspot.com/p/blog-page_10.html" style="color: #007a3d; display: block; font-size: 10px; margin-top: 15px; text-decoration: none;">اطّلع على سياسة الخصوصية الخاصة بنا</a>
-        <div id="errorMsg" style="color: #ee2335; font-size: 12px; font-weight: bold; margin-top: 10px;"></div>
-    </div>
-
-    <div id="welcomePage" style="animation: 0.4s ease 0s 1 normal none running slideUp; background: rgb(255, 255, 255); border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 40px; display: none; padding: 30px 20px;">
-        <div style="font-size: 40px; margin-bottom: 10px;">👤</div>
-        <h2 style="color: #666666; font-size: 16px; margin: 0px;">أهلاً بك الزميل(ة)</h2>
-        <h1 id="userNameHello" style="color: #111111; font-size: 20px; font-weight: 900; margin: 5px 0px 20px;"></h1>
-        <div style="background: rgb(249, 249, 249); border-radius: 12px; border: 1px solid rgb(238, 238, 238); margin-bottom: 25px; padding: 15px;">
-            <div style="align-items: center; display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span id="rankTitle" style="font-size: 12px; font-weight: 900;"></span>
-                <span id="pointsCount" style="color: #d4af37; font-size: 11px; font-weight: bold;"></span>
-            </div>
-            <div style="background: rgb(238, 238, 238); border-radius: 10px; height: 6px; overflow: hidden; width: 100%;">
-                <div id="rankBar" style="background: rgb(26, 26, 26); height: 100%; transition: 1.2s; width: 0%;"></div>
-            </div>
-        </div>
-        <button onclick="goToDashboard()" style="background: rgb(26, 26, 26); border-radius: 12px; border: none; color: white; cursor: pointer; font-weight: bold; padding: 15px; width: 100%;">الدخول إلى لوحة الخدمات</button>
-    </div>
-
-    <div id="dashboardSection" style="animation: 0.5s ease 0s 1 normal none running fadeIn; display: none;">
-        <div style="background: rgb(255, 255, 255); border-radius: 15px; border: 1px solid rgb(238, 238, 238); display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-bottom: 15px; padding: 15px;">
-            <div class="srv-node" onclick="showContent('card')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="4"><path d="M7 8h10M7 12h10M7 16h6"></path></rect></svg></div><span>البطاقة</span></div>
-            <div class="srv-node" onclick="showContent('doc1')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"><polyline points="14 2 14 8 20 8"></polyline></path></svg></div><span>انتساب</span></div>
-            <div class="srv-node" onclick="showContent('doc2')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="7"><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></rect></svg></div><span>مهام</span></div>
-            <div class="srv-node" onclick="showContent('doc3')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"><polyline points="22 4 12 14.01 9 11.01"></polyline></path></svg></div><span>براءة ذمة</span></div>
-            <div class="srv-node" onclick="showContent('doc4')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path></svg></div><span>مشاركة</span></div>
-            <div class="srv-node" onclick="showContent('doc5')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"><circle cx="9" cy="7" r="4"></circle></path></svg></div><span>تطوع</span></div>
-            <div class="srv-node" onclick="showContent('doc6')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg></div><span>توصية</span></div>
-            <div class="srv-node" onclick="showContent('doc7')"><div class="icon-box"><svg fill="none" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-4.5 6H10.3Z"></path></svg></div><span>تصريح</span></div>
-        </div>
-    </div>
-
-    <div id="outputArea" style="display: none;">
-        <div class="content-panel" id="view-card">
-            <div id="captureArea" style="background: rgb(255, 255, 255); border-radius: 15px; border: 1px solid rgb(221, 221, 221); overflow: hidden; position: relative; width: 100%;">
-                <div id="rankStripe" style="background: rgb(0, 0, 0); height: 8px;"></div>
-                <div style="align-items: center; background: rgb(250, 250, 250); border-bottom: 2px solid rgb(212, 175, 55); display: flex; padding: 15px;">
-                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="height: 55px; margin-left: 15px; width: 55px;" />
-                    <div style="text-align: right;">
-                        <div style="color: black; font-size: 15px; font-weight: 900;">الاتحاد العام لطلبة فلسطين</div>
-                        <div style="color: #007a3d; font-size: 12px; font-weight: 700;">فرع الجزائر - GUPS ALGERIA</div>
-                    </div>
-                </div>
-                <div style="background: rgb(255, 255, 255); min-height: 160px; padding: 20px; position: relative;">
-                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="left: 50%; opacity: 0.04; pointer-events: none; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 130px;" />
-                    <div style="display: grid; gap: 15px; grid-template-columns: 1fr 1fr; position: relative; text-align: right; z-index: 1;">
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الاسم الكامل</small><div id="val-n" style="color: black; font-size: 13px; font-weight: 800;"></div></div>
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الرقم التعريفي</small><div id="val-i" style="color: black; font-size: 13px; font-weight: 800;"></div></div>
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">الوحدة التنظيمية</small><div id="val-u" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">المهمة الرسمية</small><div id="val-t" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">رقم الجوال</small><div id="val-p" style="color: #333333; font-size: 12px; font-weight: 700;"></div></div>
-                        <div style="border-right: 3px solid rgb(212, 175, 55); padding-right: 8px;"><small style="color: #888888; font-size: 9px; font-weight: 700;">تاريخ الإصدار</small><div style="color: #333333; font-size: 12px; font-weight: 700;">2026/2027</div></div>
-                    </div>
-                </div>
-                <div style="background: rgb(26, 26, 26); color: #d4af37; font-size: 9px; font-weight: 900; letter-spacing: 0.5px; padding: 10px; text-align: center;">GENERAL UNION OF PALESTINE STUDENTS • ALGERIA BRANCH</div>
-                <div style="background: rgb(244, 244, 244); border-top: 1px solid rgb(221, 221, 221); color: #555555; font-size: 7px; font-weight: bold; padding: 6px; text-align: center;">بطاقة عضوية رقمية صادرة عن الاتحاد العام لطلبة فلسطين - فرع الجزائر، مخصصة لإثبات الصفة النقابية </div>
-            </div>
-            <button class="dl-btn" onclick="download('captureArea', 'ID_Card')">تحميل البطاقة </button>
-            <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <button class="wallet-btn" style="background: rgb(0, 0, 0); color: white;"> Apple Wallet</button>
-                <button class="wallet-btn" style="background: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); color: black;">Google Wallet</button>
-            </div>
-        </div>
-
-        <div class="content-panel" id="view-official" style="display: none;">
-            <div id="captureDoc" style="background: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238); box-sizing: border-box; padding: 35px 25px; position: relative; text-align: right; width: 100%;">
-                <div style="align-items: center; border-bottom: 2px solid rgb(0, 0, 0); display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 10px;">
-                    <div style="font-size: 11px; font-weight: bold; line-height: 1.4;">الاتحاد العام لطلبة فلسطين<br />فرع الجزائر</div>
-                    <img crossorigin="anonymous" src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" style="width: 45px;" />
-                </div>
-                <h3 id="docTitle" style="font-size: 17px; font-weight: 900; margin-bottom: 20px; text-align: center; text-decoration: underline;"></h3>
-                <div id="docBody" style="color: #111111; font-size: 14px; line-height: 1.8; min-height: 120px; text-align: justify;"></div>
-                <div style="align-items: flex-end; display: flex; justify-content: space-between; margin-top: 35px;">
-                    <div style="color: #666666; font-size: 9px;">صدرت الكترونياً بتاريخ: <span id="docDate"></span></div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; font-weight: bold;">رئيس فرع الجزائر</div>
-                        <div style="font-family: serif; font-size: 17px; font-weight: bold; margin: 2px 0px;">د. عهد خوالدة</div>
-                        <div style="border: 1px solid rgb(0, 0, 0); font-size: 8px; font-weight: bold; padding: 1px 3px;">ختم رقمي معتمد </div>
-                    </div>
-                </div>
-                <div style="border-top: 1px solid rgb(238, 238, 238); margin-top: 20px; padding-top: 10px; text-align: center;">
-                    <p style="color: #777777; font-size: 15px; line-height: 1.2; margin: 0px;">هذه الوثيقة صادرة إلكترونياً عن الاتحاد العام لطلبة فلسطين - فرع الجزائر.<br />تُستخدم لأغراض تنظيمية داخلية فقط ولا تُعتبر مستنداً رسمياً خارج أطر الاتحاد.</p>
-                </div>
-            </div>
-            <button class="dl-btn" onclick="download('captureDoc', 'Official_Document')" style="background: rgb(17, 17, 17);">تحميل الوثيقة المعتمدة</button>
-        </div>
-    </div>
-</div>
+<div id="gups-portal-container">
 
 <style>
-    .srv-node { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.2s; }
-    .icon-box { width: 45px; height: 45px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #1a1a1a; border: 1px solid #eee; margin-bottom: 5px; }
-    .srv-node span { font-size: 9px; font-weight: 800; color: #444; white-space: nowrap; }
-    .srv-node:hover .icon-box { background: #d4af37; color: #fff; border-color: #d4af37; }
-    .dl-btn { margin-top:15px; width:100%; padding:14px; background:#007a3d; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:bold; font-family:'Cairo'; font-size:14px; }
-    .wallet-btn { flex:1; border-radius:8px; padding:10px; font-weight:bold; font-size:10px; cursor:pointer; font-family:'Cairo'; }
-    @keyframes slideUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+#gups-portal-container * { margin: 0; padding: 0; box-sizing: border-box; }
+#gups-portal-container { font-family: 'Cairo', sans-serif; direction: rtl; text-align: right; width: 100%; max-width: 500px; margin: 0 auto; padding: 10px; }
+#gups-portal-container .gups-login-box { background: white; border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); padding: 30px 20px; border-top: 5px solid #1a1a1a; animation: gupsSlideDown 0.5s ease-out; }
+#gups-portal-container .gups-login-box.gups-hidden { display: none; }
+#gups-portal-container .gups-login-box img { width: 65px; height: 65px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
+#gups-portal-container .gups-login-box h2 { font-size: 16px; font-weight: 900; color: #1a1a1a; margin-bottom: 4px; text-align: center; }
+#gups-portal-container .gups-login-box p { font-size: 10px; color: #666; margin-bottom: 22px; text-align: center; }
+#gups-portal-container .gups-form-group { margin-bottom: 12px; }
+#gups-portal-container .gups-form-group input { width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 9px; font-family: 'Cairo', sans-serif; font-size: 14px; text-align: center; background: #fafafa; transition: all 0.3s ease; color: #111; outline: none; }
+#gups-portal-container .gups-form-group input:focus { border-color: #d4af37; background: white; box-shadow: 0 0 0 3px rgba(212,175,55,0.1); }
+#gups-portal-container .gups-form-group button { width: 100%; padding: 12px 14px; background: #1a1a1a; color: #d4af37; border: none; border-radius: 9px; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 900; cursor: pointer; transition: all 0.3s ease; }
+#gups-portal-container .gups-form-group button:hover { background: #333; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+#gups-portal-container .gups-error-msg { color: #ee2335; font-size: 11px; font-weight: bold; margin-top: 8px; display: none; text-align: center; }
+#gups-portal-container .gups-welcome-page { display: none; background: white; border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); padding: 30px 20px; animation: gupsSlideUp 0.5s ease-out; }
+#gups-portal-container .gups-welcome-page.gups-show { display: block; }
+#gups-portal-container .gups-greeting { text-align: center; margin-bottom: 18px; }
+#gups-portal-container .gups-greeting-icon { font-size: 40px; margin-bottom: 8px; }
+#gups-portal-container .gups-greeting h2 { font-size: 13px; color: #666; margin-bottom: 4px; }
+#gups-portal-container .gups-greeting h1 { font-size: 18px; font-weight: 900; color: #1a1a1a; }
+#gups-portal-container .gups-rank-card { background: #f9f9f9; padding: 13px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px; }
+#gups-portal-container .gups-rank-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+#gups-portal-container .gups-rank-title { font-weight: 900; font-size: 11px; color: #1a1a1a; }
+#gups-portal-container .gups-points-count { font-size: 10px; font-weight: bold; color: #d4af37; }
+#gups-portal-container .gups-rank-bar { width: 100%; height: 5px; background: #eee; border-radius: 10px; overflow: hidden; }
+#gups-portal-container .gups-rank-progress { height: 100%; background: #1a1a1a; transition: width 1.2s ease; width: 0%; }
+#gups-portal-container .gups-dashboard-btn { width: 100%; padding: 12px 14px; background: #1a1a1a; color: white; border: none; border-radius: 9px; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+#gups-portal-container .gups-dashboard-btn:hover { background: #333; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+#gups-portal-container .gups-dashboard-section { display: none; animation: gupsFadeIn 0.5s ease-out; }
+#gups-portal-container .gups-dashboard-section.gups-show { display: block; }
+#gups-portal-container .gups-services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: white; padding: 12px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+#gups-portal-container .gups-service-node { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; padding: 8px 4px; border-radius: 8px; }
+#gups-portal-container .gups-service-node:hover { transform: translateY(-2px); }
+#gups-portal-container .gups-icon-box { width: 40px; height: 40px; background: white; border-radius: 7px; display: flex; align-items: center; justify-content: center; border: 1px solid #eee; margin-bottom: 6px; transition: all 0.3s ease; font-size: 18px; }
+#gups-portal-container .gups-service-node:hover .gups-icon-box { background: #d4af37; border-color: #d4af37; transform: scale(1.08); }
+#gups-portal-container .gups-service-node span { font-size: 8px; font-weight: 800; color: #444; white-space: nowrap; text-align: center; }
+#gups-portal-container .gups-output-area { display: none; }
+#gups-portal-container .gups-output-area.gups-show { display: block; }
+#gups-portal-container .gups-id-card-container { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); margin-bottom: 12px; }
+#gups-portal-container .gups-id-card { width: 100%; background: #fff; border-radius: 12px; border: 1px solid #ddd; position: relative; overflow: hidden; }
+#gups-portal-container .gups-card-stripe { height: 7px; background: #000; width: 100%; }
+#gups-portal-container .gups-card-header { display: flex; align-items: center; padding: 12px; border-bottom: 2px solid #d4af37; background: #fafafa; }
+#gups-portal-container .gups-card-header img { width: 48px; height: 48px; margin-left: 12px; object-fit: contain; }
+#gups-portal-container .gups-card-header-text { text-align: right; }
+#gups-portal-container .gups-org-name { font-weight: 900; font-size: 13px; color: #000; margin-bottom: 2px; }
+#gups-portal-container .gups-branch-name { font-weight: 700; font-size: 10px; color: #007a3d; }
+#gups-portal-container .gups-card-content { padding: 16px; position: relative; background: white; min-height: 140px; }
+#gups-portal-container .gups-card-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 110px; opacity: 0.04; pointer-events: none; }
+#gups-portal-container .gups-card-data { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: right; position: relative; z-index: 1; }
+#gups-portal-container .gups-card-field { border-right: 3px solid #d4af37; padding-right: 7px; }
+#gups-portal-container .gups-card-field-label { color: #888; font-size: 8px; font-weight: 700; display: block; margin-bottom: 2px; }
+#gups-portal-container .gups-card-field-value { font-weight: 800; font-size: 12px; color: #000; }
+#gups-portal-container .gups-card-footer { background: #1a1a1a; color: #d4af37; padding: 8px; text-align: center; font-size: 8px; font-weight: 900; letter-spacing: 0.5px; }
+#gups-portal-container .gups-card-legal { font-size: 6.5px; color: #666; line-height: 1.4; padding: 7px 10px; border-top: 1px solid #eee; text-align: center; background: #fafafa; }
+#gups-portal-container .gups-action-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+#gups-portal-container .gups-download-btn { flex: 1; min-width: 120px; padding: 11px; background: #007a3d; color: white; border: none; border-radius: 9px; font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+#gups-portal-container .gups-download-btn:hover { background: #005a2e; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,122,61,0.3); }
+#gups-portal-container .gups-download-doc-btn { flex: 1; min-width: 120px; padding: 11px; background: #333; color: white; border: none; border-radius: 9px; font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+#gups-portal-container .gups-download-doc-btn:hover { background: #555; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+#gups-portal-container .gups-wallet-btn { flex: 1; min-width: 100px; padding: 9px; border-radius: 7px; font-family: 'Cairo', sans-serif; font-size: 11px; font-weight: bold; cursor: pointer; border: 1px solid #ccc; transition: all 0.3s ease; }
+#gups-portal-container .gups-wallet-btn.apple { background: black; color: white; }
+#gups-portal-container .gups-wallet-btn.google { background: white; color: black; }
+#gups-portal-container .gups-wallet-btn:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+#gups-portal-container .gups-document-container { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); margin-bottom: 12px; display: none; }
+#gups-portal-container .gups-document-container.gups-show { display: block; }
+#gups-portal-container .gups-official-doc { width: 100%; background: white; padding: 24px 20px; border: 1px solid #eee; position: relative; text-align: right; }
+#gups-portal-container .gups-doc-header { border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start; }
+#gups-portal-container .gups-doc-header-text { font-weight: bold; font-size: 10px; line-height: 1.5; text-align: right; color: #111; }
+#gups-portal-container .gups-doc-header img { width: 40px; height: auto; object-fit: contain; }
+#gups-portal-container .gups-doc-title { text-align: center; font-size: 15px; text-decoration: underline; font-weight: 900; margin-bottom: 16px; color: #1a1a1a; }
+#gups-portal-container .gups-doc-body { font-size: 13px; line-height: 1.8; color: #111; text-align: justify; min-height: 100px; margin-bottom: 24px; }
+#gups-portal-container .gups-doc-body strong { font-weight: 900; color: #000; }
+#gups-portal-container .gups-doc-footer { margin-top: 28px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+#gups-portal-container .gups-doc-date { font-size: 8.5px; color: #666; }
+#gups-portal-container .gups-doc-signature { text-align: center; }
+#gups-portal-container .gups-signature-title { font-weight: bold; font-size: 10px; margin-bottom: 2px; color: #111; }
+#gups-portal-container .gups-signature-name { font-family: Georgia, serif; font-size: 14px; font-weight: bold; margin: 2px 0; color: #000; }
+#gups-portal-container .gups-signature-stamp { font-size: 7.5px; border: 1px solid #007a3d; padding: 2px 4px; font-weight: bold; color: #007a3d; display: inline-block; margin-top: 4px; border-radius: 3px; background: rgba(0,122,61,0.05); }
+#gups-portal-container .gups-doc-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 160px; opacity: 0.02; pointer-events: none; }
+@keyframes gupsSlideDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gupsSlideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gupsFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 400px) {
+    #gups-portal-container .gups-services-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; }
+    #gups-portal-container .gups-icon-box { width: 34px; height: 34px; font-size: 15px; }
+    #gups-portal-container .gups-card-data { grid-template-columns: 1fr; gap: 10px; }
+    #gups-portal-container .gups-doc-footer { flex-direction: column; gap: 16px; }
+}
 </style>
 
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- صندوق تسجيل الدخول -->
+    <div class="gups-login-box" id="gupsLoginBox">
+        <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="شعار الاتحاد">
+        <h2>بوابة الخدمات الرقمية</h2>
+        <p>فرع الجزائر - GUPS ALGERIA</p>
+        <div class="gups-form-group">
+            <input type="text" id="gupsSearchId" placeholder="أدخل الرقم التعريفي الموحد" maxlength="20">
+        </div>
+        <div class="gups-form-group">
+            <button onclick="gupsFetchAndShow()">تسجيل الدخول</button>
+        </div>
+        <div class="gups-error-msg" id="gupsErrorMsg"></div>
+    </div>
+
+    <!-- صفحة الترحيب -->
+    <div class="gups-welcome-page" id="gupsWelcomePage">
+        <div class="gups-greeting">
+            <div class="gups-greeting-icon">👤</div>
+            <h2>أهلاً بك الزميل(ة)</h2>
+            <h1 id="gupsUserNameHello"></h1>
+        </div>
+        <div class="gups-rank-card">
+            <div class="gups-rank-header">
+                <span class="gups-rank-title" id="gupsRankTitle"></span>
+                <span class="gups-points-count" id="gupsPointsCount"></span>
+            </div>
+            <div class="gups-rank-bar">
+                <div class="gups-rank-progress" id="gupsRankBar"></div>
+            </div>
+        </div>
+        <button class="gups-dashboard-btn" onclick="gupsGoToDashboard()">الدخول إلى لوحة الخدمات</button>
+    </div>
+
+    <!-- لوحة الخدمات -->
+    <div class="gups-dashboard-section" id="gupsDashboardSection">
+        <div class="gups-services-grid">
+            <div class="gups-service-node" onclick="gupsShowContent('card')">
+                <div class="gups-icon-box">🆔</div>
+                <span>البطاقة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc1')">
+                <div class="gups-icon-box">📄</div>
+                <span>انتساب</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc2')">
+                <div class="gups-icon-box">✅</div>
+                <span>مهام</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc3')">
+                <div class="gups-icon-box">✋</div>
+                <span>براءة ذمة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc4')">
+                <div class="gups-icon-box">🤝</div>
+                <span>مشاركة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc5')">
+                <div class="gups-icon-box">❤️</div>
+                <span>تطوع</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc6')">
+                <div class="gups-icon-box">⭐</div>
+                <span>توصية</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc7')">
+                <div class="gups-icon-box">🎖️</div>
+                <span>تصريح</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- منطقة المخرجات -->
+    <div class="gups-output-area" id="gupsOutputArea">
+
+        <!-- بطاقة الهوية -->
+        <div class="gups-id-card-container" id="gupsIdCardContainer">
+            <div class="gups-id-card" id="captureArea">
+                <div class="gups-card-stripe" id="gupsRankStripe"></div>
+                <div class="gups-card-header">
+                    <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="Logo" crossorigin="anonymous">
+                    <div class="gups-card-header-text">
+                        <div class="gups-org-name">الاتحاد العام لطلبة فلسطين</div>
+                        <div class="gups-branch-name">فرع الجزائر - GUPS ALGERIA</div>
+                    </div>
+                </div>
+                <div class="gups-card-content">
+                    <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="" class="gups-card-watermark" crossorigin="anonymous">
+                    <div class="gups-card-data">
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">الاسم الكامل</span>
+                            <div class="gups-card-field-value" id="val-n"></div>
+                        </div>
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">الرقم التعريفي</span>
+                            <div class="gups-card-field-value" id="val-i"></div>
+                        </div>
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">الوحدة التنظيمية</span>
+                            <div class="gups-card-field-value" id="val-u"></div>
+                        </div>
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">المهمة الرسمية</span>
+                            <div class="gups-card-field-value" id="val-t"></div>
+                        </div>
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">رقم الجوال</span>
+                            <div class="gups-card-field-value" id="val-p"></div>
+                        </div>
+                        <div class="gups-card-field">
+                            <span class="gups-card-field-label">تاريخ الإصدار</span>
+                            <div class="gups-card-field-value">2025 / 2026</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gups-card-footer">GENERAL UNION OF PALESTINE STUDENTS &bull; ALGERIA BRANCH</div>
+                <div class="gups-card-legal">
+                    تعتبر هذه البطاقة وثيقة رسمية صادرة عن الاتحاد العام لطلبة فلسطين - فرع الجزائر، ويحظر تزويرها أو استخدامها من غير صاحبها تحت طائلة المسؤولية القانونية.
+                </div>
+            </div>
+            <div class="gups-action-buttons">
+                <button class="gups-download-btn" onclick="gupsDownloadCard()">⬇ تحميل البطاقة</button>
+            </div>
+            <div class="gups-action-buttons" style="margin-top:7px;">
+                <button class="gups-wallet-btn apple"> Apple Wallet</button>
+                <button class="gups-wallet-btn google">Google Wallet</button>
+            </div>
+        </div>
+
+        <!-- الوثائق الرسمية -->
+        <div class="gups-document-container" id="gupsDocumentContainer">
+            <div class="gups-official-doc" id="captureDoc">
+                <div class="gups-doc-header">
+                    <div class="gups-doc-header-text">الاتحاد العام لطلبة فلسطين<br>فرع الجزائر</div>
+                    <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="Logo" crossorigin="anonymous">
+                </div>
+                <div class="gups-doc-title" id="docTitle"></div>
+                <div class="gups-doc-body" id="docBody"></div>
+                <div class="gups-doc-footer">
+                    <div class="gups-doc-date">صدرت الكترونياً بتاريخ: <span id="docDate"></span></div>
+                    <div class="gups-doc-signature">
+                        <div class="gups-signature-title">رئيس فرع الجزائر</div>
+                        <div class="gups-signature-name">د. عهد خوالدة</div>
+                        <div class="gups-signature-stamp">ختم رقمي معتمد</div>
+                    </div>
+                </div>
+                <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="" class="gups-doc-watermark" crossorigin="anonymous">
+            </div>
+            <div class="gups-action-buttons">
+                <button class="gups-download-doc-btn" onclick="gupsDownloadDoc()">⬇ تحميل الوثيقة</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 <script>
-    let gupsData = [];
-    let student = null;
-    const DATA_SRC = 'https://docs.google.com/spreadsheets/d/15_-mHBHxUHPoYsdLzYqfsqkHJoQr6z2FvC2Brj2yOtc/gviz/tq?tqx=out:json';
+(function() {
+    var gupsData = [];
+    var gupsStudent = null;
+    var DATA_SRC = 'https://docs.google.com/spreadsheets/d/15_-mHBHxUHPoYsdLzYqfsqkHJoQr6z2FvC2Brj2yOtc/gviz/tq?tqx=out:json';
 
-    async function loadData() {
+    async function gupsLoadData() {
         try {
-            const r = await fetch(DATA_SRC);
-            const t = await r.text();
-            const j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
-            gupsData = j.table.rows.filter(row => row.c && row.c[0]).map(row => ({
-                id: String(row.c[0].v).trim(),
-                name: row.c[1] ? row.c[1].v : '',
-                unit: row.c[2] ? row.c[2].v : '',
-                task: row.c[3] ? row.c[3].v : '',
-                points: row.c[4] ? parseInt(row.c[4].v) : 0,
-                phone: row.c[5] ? row.c[5].v : ''
-            }));
-        } catch(e) {}
+            var r = await fetch(DATA_SRC);
+            var t = await r.text();
+            var j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
+            gupsData = j.table.rows.filter(function(row) { return row.c && row.c[0]; }).map(function(row) {
+                return {
+                    id:     String(row.c[0].v).trim(),
+                    name:   row.c[1] ? row.c[1].v : '',
+                    unit:   row.c[2] ? row.c[2].v : '',
+                    task:   row.c[3] ? row.c[3].v : '',
+                    points: row.c[4] ? parseInt(row.c[4].v) : 0,
+                    phone:  row.c[5] ? row.c[5].v : ''
+                };
+            });
+        } catch(e) { console.error('GUPS: خطأ في تحميل البيانات', e); }
     }
 
-    function updateRank(pts) {
-        let rank = "عضو"; let color = "#000"; let percent = (pts / 100) * 100;
-        if (pts >= 100) { rank = "عضو فاعل"; color = "#007a3d"; percent = 100; }
-        if (pts >= 300) { rank = "عضو ذهبي"; color = "#d4af37"; }
-
-        document.getElementById('rankTitle').innerText = "رتبة الكادر: " + rank;
-        document.getElementById('pointsCount').innerText = pts + " نقطة";
-        document.getElementById('rankBar').style.width = Math.min(percent, 100) + "%";
-        document.getElementById('rankStripe').style.background = color;
+    function gupsUpdateRank(pts) {
+        var rank = 'مبادر', color = '#000', percent = (pts / 100) * 100;
+        if (pts >= 100) { rank = 'كادر فاعل'; color = '#007a3d'; percent = 100; }
+        if (pts >= 300) { rank = 'كادر ذهبي'; color = '#d4af37'; }
+        document.getElementById('gupsRankTitle').innerText = 'رتبة الكادر: ' + rank;
+        document.getElementById('gupsPointsCount').innerText = pts + ' نقطة';
+        document.getElementById('gupsRankBar').style.width = Math.min(percent, 100) + '%';
+        document.getElementById('gupsRankStripe').style.background = color;
     }
 
-    async function fetchAndShow() {
-        if (gupsData.length === 0) await loadData();
-        const idInput = document.getElementById('gupsSearchId').value.trim();
-        student = gupsData.find(s => s.id === idInput);
-        
-        if (student) {
-            document.getElementById('userNameHello').innerText = student.name;
-            document.getElementById('val-n').innerText = student.name;
-            document.getElementById('val-i').innerText = student.id;
-            document.getElementById('val-u').innerText = student.unit;
-            document.getElementById('val-t').innerText = student.task;
-            document.getElementById('val-p').innerText = student.phone;
-            document.getElementById('docDate').innerText = new Date().toLocaleDateString('ar-EG');
-            
-            updateRank(student.points || 0);
-            document.getElementById('loginBox').style.display = 'none';
-            document.getElementById('welcomePage').style.display = 'block';
+    window.gupsFetchAndShow = async function() {
+        if (gupsData.length === 0) await gupsLoadData();
+        var idInput = document.getElementById('gupsSearchId').value.trim();
+        var errorMsg = document.getElementById('gupsErrorMsg');
+        gupsStudent = gupsData.find(function(s) { return s.id === idInput; });
+        if (gupsStudent) {
+            document.getElementById('gupsUserNameHello').innerText = gupsStudent.name;
+            document.getElementById('val-n').innerText = gupsStudent.name;
+            document.getElementById('val-i').innerText = gupsStudent.id;
+            document.getElementById('val-u').innerText = gupsStudent.unit;
+            document.getElementById('val-t').innerText = gupsStudent.task;
+            document.getElementById('val-p').innerText = gupsStudent.phone;
+            document.getElementById('docDate').innerText = new Date().toLocaleDateString('ar-DZ', { year:'numeric', month:'long', day:'numeric' });
+            gupsUpdateRank(gupsStudent.points || 0);
+            document.getElementById('gupsLoginBox').classList.add('gups-hidden');
+            document.getElementById('gupsWelcomePage').classList.add('gups-show');
+            errorMsg.style.display = 'none';
         } else {
-            document.getElementById('errorMsg').innerText = " الرقم التعريفي غير مسجل لدى فرع الجزائر";
+            errorMsg.innerText = '❌ الرقم التعريفي غير مسجل بالسجلات';
+            errorMsg.style.display = 'block';
         }
-    }
+    };
 
-    function goToDashboard() {
-        document.getElementById('welcomePage').style.display = 'none';
-        document.getElementById('dashboardSection').style.display = 'block';
-        document.getElementById('outputArea').style.display = 'block';
-        showContent('card');
-    }
+    window.gupsGoToDashboard = function() {
+        document.getElementById('gupsWelcomePage').classList.remove('gups-show');
+        document.getElementById('gupsDashboardSection').classList.add('gups-show');
+        document.getElementById('gupsOutputArea').classList.add('gups-show');
+        gupsShowContent('card');
+    };
 
-    function showContent(type) {
-        document.querySelectorAll('.content-panel').forEach(p => p.style.display = 'none');
-        if(type === 'card') {
-            document.getElementById('view-card').style.display = 'block';
+    window.gupsShowContent = function(type) {
+        var cardContainer = document.getElementById('gupsIdCardContainer');
+        var docContainer  = document.getElementById('gupsDocumentContainer');
+        if (type === 'card') {
+            cardContainer.style.display = 'block';
+            docContainer.style.display  = 'none';
         } else {
-            const title = document.getElementById('docTitle');
-            const body = document.getElementById('docBody');
-            const docs = {
-                'doc1': ['شهادة انتساب رسمية', `يشهد الاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <b>${student.name}</b>، المقيد بالسجلات الإدارية تحت الرقم <b>${student.id}</b>، هو عضو منتسب رسمياً ضمن صفوف الاتحاد للعام الدراسي 2025/2026 ضمن وحدة ولاية <b>${student.unit}</b>، وبناءً عليه مُنح هذه الشهادة لإثبات الصفة النقابية.`],
-                'doc2': ['إفادة إثبات مهام نقابية', `يصادق الاتحاد العام لطلبة فلسطين بالجزائر بأن الزميل(ة) <b>${student.name}</b> يشغل منصب <b>(${student.task})</b>، وهو مكلف بممارسة كافة الصلاحيات والمسؤوليات النقابية الموكلة إليه لتمثيل الطلبة وفق النظام الأساسي للاتحاد.`],
-                'doc3': ['شهادة براءة ذمة إدارية', `تفيد الهيئة الإدارية للاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <b>${student.name}</b> قد أتم كافة الالتزامات الإدارية والمالية تجاه الاتحاد، وليس لديه أي متعلقات أو عهدة عالقة حتى تاريخ صدور هذه الشهادة.`],
-                'doc4': ['شهادة مشاركة وتقدير', `يتقدم الاتحاد العام لطلبة فلسطين بخالص الشكر والتقدير للزميل(ة) <b>${student.name}</b>، وذلك لمشاركته الفعالة وجهوده الملموسة في إنجاح النشاطات الوطنية والدورات التكوينية التي نظمها فرع الجزائر خلال الموسم الدراسي الجاري.`],
-                'doc5': ['إفادة عمل تطوعي', `يشهد فرع الجزائر بأن الزميل(ة) <b>${student.name}</b> قد ساهم بجهود تطوعية متميزة في خدمة الطلبة الفلسطينيين بالجزائر، وقد أظهر خلال فترة تطوعه روحاً وطنية عالية وانضباطاً في العمل الميداني.`],
-                'doc6': ['رسالة توصية رسمية', `بناءً على السيرة النقابية المشرفة للزميل(ة) <b>${student.name}</b> والتزامه بالمهام الموكلة إليه، فإننا نوصي به ككادر متميز يتمتع بروح المسؤولية والكفاءة في العمل الجماعي، ونشجع كافة الجهات المعنية على التعاون معه.`],
-                'doc7': ['تصريح فعاليات ومهمة', `يمنح هذا التصريح للزميل(ة) <b>${student.name}</b> بصفته كادراً رسمياً في الاتحاد، لتسهيل حضوره وتمثيله للاتحاد في الفعاليات الوطنية والمحلية المقامة في ولاية <b>${student.unit}</b>، مع الرجاء من السلطات المعنية تقديم التسهيلات اللازمة.`]
+            var docs = {
+                doc1: ['شهادة انتساب رسمية',
+                    'يشهد الاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <strong>' + gupsStudent.name + '</strong>، المقيد بالسجلات الإدارية تحت الرقم <strong>' + gupsStudent.id + '</strong>، هو عضو منتسب رسمياً ضمن صفوف الاتحاد للعام الدراسي 2025/2026 ضمن وحدة ولاية <strong>' + gupsStudent.unit + '</strong>، وبناءً عليه مُنح هذه الشهادة لإثبات الصفة النقابية.'],
+                doc2: ['إفادة إثبات مهام نقابية',
+                    'يصادق الاتحاد العام لطلبة فلسطين بالجزائر بأن الزميل(ة) <strong>' + gupsStudent.name + '</strong> يشغل منصب <strong>(' + gupsStudent.task + ')</strong>، وهو مكلف بممارسة كافة الصلاحيات والمسؤوليات النقابية الموكلة إليه لتمثيل الطلبة وفق النظام الأساسي للاتحاد.'],
+                doc3: ['شهادة براءة ذمة إدارية',
+                    'تفيد الهيئة الإدارية للاتحاد العام لطلبة فلسطين - فرع الجزائر، بأن الزميل(ة) <strong>' + gupsStudent.name + '</strong> قد أتم كافة الالتزامات الإدارية والمالية تجاه الاتحاد، وليس لديه أي متعلقات أو عهدة عالقة حتى تاريخ صدور هذه الشهادة.'],
+                doc4: ['شهادة مشاركة وتقدير',
+                    'يتقدم الاتحاد العام لطلبة فلسطين بخالص الشكر والتقدير للزميل(ة) <strong>' + gupsStudent.name + '</strong>، وذلك لمشاركته الفعالة وجهوده الملموسة في إنجاح النشاطات الوطنية والدورات التكوينية التي نظمها فرع الجزائر خلال الموسم الدراسي الجاري.'],
+                doc5: ['إفادة عمل تطوعي',
+                    'يشهد فرع الجزائر بأن الزميل(ة) <strong>' + gupsStudent.name + '</strong> قد ساهم بجهود تطوعية متميزة في خدمة الطلبة الفلسطينيين بالجزائر، وقد أظهر خلال فترة تطوعه روحاً وطنية عالية وانضباطاً في العمل الميداني.'],
+                doc6: ['رسالة توصية رسمية',
+                    'بناءً على السيرة النقابية المشرفة للزميل(ة) <strong>' + gupsStudent.name + '</strong> والتزامه بالمهام الموكلة إليه، فإننا نوصي به ككادر متميز يتمتع بروح المسؤولية والكفاءة في العمل الجماعي، ونشجع كافة الجهات المعنية على التعاون معه.'],
+                doc7: ['تصريح فعاليات ومهمة',
+                    'يمنح هذا التصريح للزميل(ة) <strong>' + gupsStudent.name + '</strong> بصفته كادراً رسمياً في الاتحاد، لتسهيل حضوره وتمثيله للاتحاد في الفعاليات الوطنية والمحلية المقامة في ولاية <strong>' + gupsStudent.unit + '</strong>، مع الرجاء من السلطات المعنية تقديم التسهيلات اللازمة.']
             };
-            title.innerText = docs[type][0];
-            body.innerHTML = docs[type][1];
-            document.getElementById('view-official').style.display = 'block';
+            var entry = docs[type] || ['', ''];
+            document.getElementById('docTitle').innerText  = entry[0];
+            document.getElementById('docBody').innerHTML   = entry[1];
+            cardContainer.style.display = 'none';
+            docContainer.style.display  = 'block';
         }
-        window.scrollTo({ top: document.getElementById('outputArea').offsetTop - 20, behavior: 'smooth' });
-    }
+        document.getElementById('gups-portal-container').scrollIntoView({ behavior: 'smooth' });
+    };
 
-    function download(divId, fileName) {
-        html2canvas(document.getElementById(divId), { scale: 3, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `GUPS_OFFICIAL_${fileName}.png`;
-            link.href = canvas.toDataURL("image/png");
-            link.click();
-        });
-    }
-    window.onload = loadData;
+    window.gupsDownloadCard = function() {
+        html2canvas(document.getElementById('captureArea'), { scale: 3, useCORS: true, backgroundColor: '#ffffff' })
+            .then(function(canvas) {
+                var link = document.createElement('a');
+                link.download = 'GUPS_ID_Card_' + gupsStudent.id + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+    };
+
+    window.gupsDownloadDoc = function() {
+        html2canvas(document.getElementById('captureDoc'), { scale: 3, useCORS: true, backgroundColor: '#ffffff' })
+            .then(function(canvas) {
+                var link = document.createElement('a');
+                link.download = 'GUPS_Document_' + gupsStudent.id + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+    };
+
+    gupsLoadData();
+})();
 </script>
+
