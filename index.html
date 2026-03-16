@@ -95,10 +95,6 @@
 
     <!-- صندوق تسجيل الدخول -->
     <div class="gups-login-box" id="gupsLoginBox">
-        <div class="gups-header-bar" id="gupsHeaderBar" style="display: none; background: #1a1a1a; color: #d4af37; padding: 15px; border-radius: 12px; margin-bottom: 20px; align-items: center; justify-content: space-between;">
-    <div>أهلاً بك: <span id="gupsHeaderName"></span></div>
-    <button onclick="location.reload()" style="background:transparent; border:1px solid #d4af37; color:#d4af37; border-radius:5px; padding:5px 10px; cursor:pointer;">خروج</button>
-</div>
         <img src="https://i.postimg.cc/yNvhMFfS/472867560-562281126673692-7338719477039439564-n.jpg" alt="شعار الاتحاد">
         <h2>بوابة الخدمات الرقمية</h2>
         <p>فرع الجزائر - GUPS ALGERIA</p>
@@ -131,43 +127,42 @@
     </div>
 
     <!-- لوحة الخدمات -->
-  <!-- لوحة الخدمات -->
-    <div class="gups-dashboard-section" id="gupsDashboardSection">
-        <div class="gups-services-grid">
-            <div class="gups-service-node" onclick="gupsShowContent('card')">
-                <div class="gups-icon-box">🆔</div>
-                <span>البطاقة</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc1')">
-                <div class="gups-icon-box">📄</div>
-                <span>انتساب</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc2')">
-                <div class="gups-icon-box">✅</div>
-                <span>مهام</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc3')">
-                <div class="gups-icon-box">✋</div>
-                <span>براءة ذمة</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc4')">
-                <div class="gups-icon-box">🤝</div>
-                <span>مشاركة</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc5')">
-                <div class="gups-icon-box">❤️</div>
-                <span>تطوع</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc6')">
-                <div class="gups-icon-box">⭐</div>
-                <span>توصية</span>
-            </div>
-            <div class="gups-service-node" onclick="gupsShowContent('doc7')">
-                <div class="gups-icon-box">🎖️</div>
-                <span>تصريح</span>
-            </div>
-        </div>
-    </div> هيو عدل هدول كلهم
+    <div class="gups-dashboard-section" id="gupsDashboardSection">
+        <div class="gups-services-grid">
+            <div class="gups-service-node" onclick="gupsShowContent('card')">
+                <div class="gups-icon-box">🆔</div>
+                <span>البطاقة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc1')">
+                <div class="gups-icon-box">📄</div>
+                <span>انتساب</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc2')">
+                <div class="gups-icon-box">✅</div>
+                <span>مهام</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc3')">
+                <div class="gups-icon-box">✋</div>
+                <span>براءة ذمة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc4')">
+                <div class="gups-icon-box">🤝</div>
+                <span>مشاركة</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc5')">
+                <div class="gups-icon-box">❤️</div>
+                <span>تطوع</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc6')">
+                <div class="gups-icon-box">⭐</div>
+                <span>توصية</span>
+            </div>
+            <div class="gups-service-node" onclick="gupsShowContent('doc7')">
+                <div class="gups-icon-box">🎖️</div>
+                <span>تصريح</span>
+            </div>
+        </div>
+    </div>
 
     <!-- منطقة المخرجات -->
     <div class="gups-output-area" id="gupsOutputArea">
@@ -218,7 +213,7 @@
                 </div>
             </div>
             <div class="gups-action-buttons">
-                <button class="gups-download-btn" onclick="gupsDownloadCard()"> تحميل البطاقة</button>
+                <button class="gups-download-btn" onclick="gupsDownloadCard()">⬇ تحميل البطاقة</button>
             </div>
             <div class="gups-action-buttons" style="margin-top:7px;">
                 <button class="gups-wallet-btn apple"> Apple Wallet</button>
@@ -289,7 +284,7 @@
     }
 
     window.gupsFetchAndShow = async function() {
-        if (if (gupsStudent{)) await gupsLoadData();
+        if (gupsData.length === 0) await gupsLoadData();
         var idInput = document.getElementById('gupsSearchId').value.trim();
         var errorMsg = document.getElementById('gupsErrorMsg');
         gupsStudent = gupsData.find(function(s) { return s.id === idInput; });
@@ -373,4 +368,5 @@
     gupsLoadData();
 })();
 </script>
+
 
